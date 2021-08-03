@@ -1,15 +1,13 @@
 package com.example.springwebredis.config;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +20,7 @@ class RedisRepositoryConfigTest {
     @DisplayName("GET: key 로 요청하는 기능 테스트")
     @Test
     void testCase1() {
-        String key  = "test_key";
+        String key = "test_key";
         String value = "value_1";
 
         ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
@@ -55,5 +53,40 @@ class RedisRepositoryConfigTest {
         List<String> range = listOps.range(key, 0, 3);
 
         System.out.println("range = " + range);
+    }
+
+    @DisplayName("SMEMBERS key 명령어 기능 테스트")
+    @Test
+    void testCase3() {
+        String key = "key_set";
+        SetOperations<String, String> setOps = redisTemplate.opsForSet();
+
+        setOps.add(key, "d");
+        setOps.add(key, "a");
+        setOps.add(key, "t");
+        setOps.add(key, "a");
+
+        Set<String> members = setOps.members(key);
+        System.out.println("members = " + members);
+
+        Long size = setOps.size(key);
+        System.out.println("size = " + size);
+
+        Cursor<String> scan = setOps.scan(key,
+                ScanOptions.scanOptions()
+                        .match("*")
+                        .count(3)
+                        .build()
+        );
+
+        while (scan.hasNext()) {
+            System.out.println("scan.next() = " + scan.next());
+        }
+    }
+
+    @DisplayName("HASH key field")
+    @Test
+    void testCase4() {
+
     }
 }

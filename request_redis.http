@@ -1,0 +1,18 @@
+### 레디스 데이터 등록
+POST http://localhost:8080/redis
+Content-Type: application/json
+
+{
+  "value": "설명"
+}
+
+### KEY LIST 조회
+GET http://localhost:8080/redis/keys
+
+
+### 데이터 단일 조회
+GET http://localhost:8080/redis/get/89c08c6d-8040-4a4a-8f80-4f59e14de2ce
+
+
+### 데이터 삭제
+DELETE

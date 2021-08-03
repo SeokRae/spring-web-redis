@@ -1,4 +1,18 @@
 package com.example.springwebredis.service;
 
-public class RedisService {
+import com.example.springwebredis.domain.RedisEntity;
+import com.example.springwebredis.dto.RedisDto;
+import com.example.springwebredis.dto.RedisResponseDto;
+
+import java.util.Map;
+import java.util.Set;
+
+public interface RedisService {
+    String addData(RedisDto saveDto);
+
+    Map<String, RedisEntity> getAllData();
+
+    Set<String> getKeys();
+
+    RedisResponseDto getData(String id);
 }
