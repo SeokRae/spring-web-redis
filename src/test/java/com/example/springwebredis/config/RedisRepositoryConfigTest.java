@@ -5,13 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Transactional
 class RedisRepositoryConfigTest {
 
     @Autowired
@@ -87,6 +90,26 @@ class RedisRepositoryConfigTest {
     @DisplayName("HASH key field")
     @Test
     void testCase4() {
+        String key = "key_hash";
 
+        HashOperations<String, Object, Object> hashOps = redisTemplate.opsForHash();
+
+        hashOps.put(key, "hashKey_1", "value_1");
+        hashOps.put(key, "hashKey_2", "value_2");
+        hashOps.put(key, "hashKey_3", "value_3");
+
+        Object hashValue1 = hashOps.get(key, "hashKey_1");
+
+        System.out.println("hashValue1 = " + hashValue1);
+
+        // key 엔트리 조회
+        Map<Object, Object> entries = hashOps.entries(key);
+
+        System.out.println("entries = " + entries);
+
+        // key size 확인
+        Long size = hashOps.size(key);
+
+        System.out.println("size = " + size);
     }
 }

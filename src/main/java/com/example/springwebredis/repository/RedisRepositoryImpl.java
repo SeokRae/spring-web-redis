@@ -12,6 +12,7 @@ import java.util.Set;
 @Slf4j
 @Repository
 public class RedisRepositoryImpl implements RedisRepository {
+    
     private final RedisTemplate<String, RedisEntity> redisTemplate;
     private final HashOperations<String, String, RedisEntity> hashOperations;
 
