@@ -5,6 +5,7 @@ import com.example.springwebredis.dto.RedisDto;
 import com.example.springwebredis.dto.RedisResponseDto;
 import com.example.springwebredis.dto.RedisSaveDto;
 import com.example.springwebredis.service.RedisService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.Set;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/redis")
 public class RedisController {
@@ -23,12 +25,14 @@ public class RedisController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addData(@RequestBody RedisSaveDto saveDto) {
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<RedisEntity> addData(@RequestBody RedisSaveDto saveDto) {
 
         RedisDto redisDto = RedisDto.toDto(saveDto);
-        String savedDataId = redisService.addData(redisDto);
+        RedisEntity savedEntity = redisService.addData(redisDto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(savedDataId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
+
     }
 
     @GetMapping
@@ -56,7 +60,10 @@ public class RedisController {
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> deleteData(@PathVariable String id) {
-        return ResponseEntity.status(HttpStatus.OK).body(id);
+    public ResponseEntity<Void> deleteData(@PathVariable String id) {
+
+        redisService.deleteData(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

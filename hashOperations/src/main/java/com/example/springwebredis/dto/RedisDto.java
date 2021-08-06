@@ -8,7 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Setter
 @Getter
@@ -34,12 +33,14 @@ public class RedisDto {
 
     public static RedisEntity toEntity(RedisDto redisDto) {
         return RedisEntity.builder()
+                .id(redisDto.getId())
                 .value(redisDto.getValue())
                 .createdAt(redisDto.getCreatedAt())
                 .build();
     }
 
-    public static RedisEntity toEntity(String id, RedisDto redisDto) {
+    /* 데이터 생성용 */
+    public static RedisEntity toSaveEntity(String id, RedisDto redisDto) {
         return RedisEntity.builder()
                 .id(id)
                 .value(redisDto.getValue())

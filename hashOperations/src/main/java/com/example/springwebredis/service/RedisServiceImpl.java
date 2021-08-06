@@ -3,7 +3,6 @@ package com.example.springwebredis.service;
 import com.example.springwebredis.domain.RedisEntity;
 import com.example.springwebredis.dto.RedisDto;
 import com.example.springwebredis.dto.RedisResponseDto;
-import com.example.springwebredis.dto.RedisSaveDto;
 import com.example.springwebredis.repository.RedisRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,29 +23,34 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public String addData(RedisDto saveDto) {
+    public RedisEntity addData(RedisDto saveDto) {
 
-        RedisEntity saveData = RedisDto.toEntity(UUID.randomUUID().toString(), saveDto);
+        RedisEntity saveData = RedisDto.toSaveEntity(UUID.randomUUID().toString(), saveDto);
 
-        return redisRepository.save(saveData);
+        return redisRepository.saveHashOps(saveData);
     }
 
     @Override
     public Map<String, RedisEntity> getAllData() {
-        return redisRepository.findAllData();
+        return redisRepository.findAllHashOps();
     }
 
     @Override
     public Set<String> getKeys() {
-        return redisRepository.keys();
+        return redisRepository.keysHashOps();
     }
 
     @Override
     public RedisResponseDto getData(String id) {
 
-        RedisEntity redisEntity = redisRepository.findById(id);
+        RedisEntity redisEntity = redisRepository.findByIdHashOps(id);
 
         return RedisResponseDto.toResponse(redisEntity);
+    }
+
+    @Override
+    public void deleteData(String id) {
+        redisRepository.delete(id);
     }
 
 }

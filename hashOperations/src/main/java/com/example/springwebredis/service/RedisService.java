@@ -8,11 +8,13 @@ import java.util.Map;
 import java.util.Set;
 
 public interface RedisService {
-    String addData(RedisDto saveDto);
+    RedisEntity addData(RedisDto saveDto);
 
     Map<String, RedisEntity> getAllData();
 
     Set<String> getKeys();
 
     RedisResponseDto getData(String id);
+
+    void deleteData(String id);
 }

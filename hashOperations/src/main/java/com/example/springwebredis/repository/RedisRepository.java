@@ -6,13 +6,15 @@ import java.util.Map;
 import java.util.Set;
 
 public interface RedisRepository {
-    RedisEntity findById(String id);
+    RedisEntity findByIdHashOps(String id);
 
-    Map<String, RedisEntity> findAllData();
+    Map<String, RedisEntity> findAllHashOps();
 
-    String save(RedisEntity entity);
+    RedisEntity saveHashOps(RedisEntity entity);
 
     void delete(String id);
 
-    Set<String> keys();
+    Set<String> keysHashOps();
+
+    Long size();
 }
