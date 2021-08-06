@@ -11,8 +11,8 @@ GET http://localhost:8080/redis/keys
 
 
 ### 단일 데이터 조회
-GET http://localhost:8080/redis/1c13e8af-ec67-42e6-aa5c-b9584eadba42
+GET http://localhost:8080/redis/78c19812-b301-4bb6-93b3-720249b7d1df
 
 
 ### 단일 데이터 삭제
-DELETE http://localhost:8080/redis/1c13e8af-ec67-42e6-aa5c-b9584eadba42
+DELETE http://localhost:8080/redis/78c19812-b301-4bb6-93b3-720249b7d1df
