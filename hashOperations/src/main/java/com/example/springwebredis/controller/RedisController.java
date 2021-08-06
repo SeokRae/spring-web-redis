@@ -51,7 +51,7 @@ public class RedisController {
         return ResponseEntity.status(HttpStatus.OK).body(keys);
     }
 
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<RedisResponseDto> getData(@PathVariable String id) {
 
         RedisResponseDto data = redisService.getData(id);
@@ -59,11 +59,11 @@ public class RedisController {
         return ResponseEntity.status(HttpStatus.OK).body(data);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<Void> deleteData(@PathVariable String id) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Long> deleteData(@PathVariable String id) {
 
-        redisService.deleteData(id);
+        Long deletedData = redisService.deleteData(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.OK).body(deletedData);
     }
 }

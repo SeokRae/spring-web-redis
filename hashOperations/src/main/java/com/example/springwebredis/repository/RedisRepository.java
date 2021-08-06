@@ -12,7 +12,7 @@ public interface RedisRepository {
 
     RedisEntity saveHashOps(RedisEntity entity);
 
-    void delete(String id);
+    Long delete(String id);
 
     Set<String> keysHashOps();
 

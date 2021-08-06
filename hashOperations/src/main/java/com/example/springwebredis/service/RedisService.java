@@ -16,5 +16,5 @@ public interface RedisService {
 
     RedisResponseDto getData(String id);
 
-    void deleteData(String id);
+    Long deleteData(String id);
 }

@@ -1,6 +1,7 @@
 package com.example.springwebredis.repository;
 
 import com.example.springwebredis.domain.RedisEntity;
+import com.example.springwebredis.exception.RedisDataDeleteFailureException;
 import com.example.springwebredis.exception.RedisDataNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
@@ -42,10 +43,11 @@ public class RedisRepositoryImpl implements RedisRepository {
     }
 
     @Override
-    public void delete(String id) {
+    public Long delete(String id) {
         if(hashKey(id)) {
-            hashOperations.delete("USER", id);
+            return hashOperations.delete("USER", id);
         }
+        throw new RedisDataDeleteFailureException();
     }
 
     public boolean hashKey(String id) {

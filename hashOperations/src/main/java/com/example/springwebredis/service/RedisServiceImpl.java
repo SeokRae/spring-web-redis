@@ -49,8 +49,8 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public void deleteData(String id) {
-        redisRepository.delete(id);
+    public Long deleteData(String id) {
+        return redisRepository.delete(id);
     }
 
 }

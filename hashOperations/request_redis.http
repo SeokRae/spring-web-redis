@@ -10,9 +10,9 @@ Content-Type: application/json
 GET http://localhost:8080/redis/keys
 
 
-### 데이터 단일 조회
-GET http://localhost:8080/redis/get/89c08c6d-8040-4a4a-8f80-4f59e14de2ce
+### 단일 데이터 조회
+GET http://localhost:8080/redis/1c13e8af-ec67-42e6-aa5c-b9584eadba42
 
 
-### 데이터 삭제
-DELETE
+### 단일 데이터 삭제
+DELETE http://localhost:8080/redis/1c13e8af-ec67-42e6-aa5c-b9584eadba42
