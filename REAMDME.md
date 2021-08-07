@@ -3,15 +3,14 @@
 ## Intro
 
 - 프로젝트에 **인증 토큰 관리**를 위해 적용해보기 위한 사전 샘플 테스트
-	- Junit으로 Repository Layer 테스트
 	- HTTP request 테스트
 
 - Redis
 
 ## HashOperations 인터페이스 테스트를 위한 프로젝트
 
-- HashOperations
-  - 
+- hashOperations 모듈
+  - hashOperations 만 사용 및 테스트 용
 
 ## Issue
 
